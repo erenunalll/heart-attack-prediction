@@ -15,6 +15,7 @@ def main():
     heart_rate_mask = (df["Heart rate"] < 200) | (df["Heart rate"] > 30)
     df = df[heart_rate_mask]
 
+    # save processed dataset
     df.to_csv("dataset/processed/processed_Medicaldataset.csv", index=False)
    
 
