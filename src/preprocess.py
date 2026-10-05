@@ -11,11 +11,15 @@ def save_dataset(df: pd.DataFrame) -> None:
 def main():
     df = pd.read_csv("dataset/raw/Medicaldataset.csv")
 
+    # numerize categorical features
     result_map = {
         "negative":0,
         "positive":1
     }
     df["Result"] = df["Result"].map(result_map)
+
+    heart_rate_mask = (df["Heart Rate"] < 200) | (df["Heart Rate"] > 30)
+    df = df[heart_rate_mask]
 
     print(df.head())
 
