@@ -46,3 +46,31 @@ for name, y_pred in predictions.items():
     print("Confusion Matrix:")
     print(confusion_matrix(y_test, y_pred))
     print()
+
+# Random Forest and Decision Tree classifiers are better
+print("="*50)
+print("="*50)
+print("="*50)
+print()
+
+X_train, X_test, y_train, y_test = train_test_split(
+    X,
+    y,
+    test_size=0.3,
+    stratify=y,
+    random_state=2026
+)
+
+predictions = {
+    "Decision Tree": decision_tree_model.predict(X_test),
+    "Random Forest": random_forest_model.predict(X_test)
+}
+
+for name, y_pred in predictions.items():
+    print(f"======== {name} ========")
+    print(f"Prediction:\n {y_pred}")
+    print(f"Accuracy: {accuracy_score(y_test, y_pred):.4f}")
+    print(classification_report(y_test, y_pred))
+    print("Confusion Matrix:")
+    print(confusion_matrix(y_test, y_pred))
+    print()
