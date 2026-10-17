@@ -21,7 +21,7 @@ X = df.drop(columns="Result")
 X_train, X_test, y_train, y_test = train_test_split(
     X,
     y,
-    test_size=0.3,
+    test_size=0.2,
     stratify=y,
     random_state=42
 )
@@ -64,4 +64,4 @@ joblib.dump(random_forest_model, "models/random_forest_model.joblib")
 joblib.dump(logistic_regression_model, "models/logistic_regression_model.joblib")
 joblib.dump(knn_model, "models/knn_model.joblib")
 joblib.dump(support_vector_model, "models/support_vector_model.joblib")
-joblib.dump(xgb_model, "models/xgb_boost.joblib")
+joblib.dump(xgb_model, "models/xgb_model.joblib")
