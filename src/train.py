@@ -5,14 +5,14 @@ from sklearn.model_selection import train_test_split
 
 from sklearn.tree import DecisionTreeClassifier
 from sklearn.ensemble import RandomForestClassifier
-
 from sklearn.linear_model import LogisticRegression
 from sklearn.neighbors import KNeighborsClassifier
 from sklearn.svm import SVC
-
 from sklearn.preprocessing import StandardScaler
 
+from xgboost import XGBClassifier
 
+# load dataset
 df = pd.read_csv("dataset/processed/processed_Medicaldataset.csv")
 
 y = df["Result"]
@@ -46,9 +46,22 @@ knn_model.fit(X_scaled, y_train)
 support_vector_model = SVC(random_state=42)
 support_vector_model.fit(X_scaled, y_train)
 
+# xgboost
+xgb_model = XGBClassifier(
+    n_estimators = 100,
+    max_depth = 3,
+    learning_rate = 0.1,
+    objective = "binary:logistic",
+    eval_metric = "logloss",
+    random_state = 42
+)
+xgb_model.fit(X_train, y_train)
+
+# save models
 joblib.dump(decision_tree_model ,"models/decision_tree_model.joblib")
 joblib.dump(random_forest_model, "models/random_forest_model.joblib")
 
 joblib.dump(logistic_regression_model, "models/logistic_regression_model.joblib")
 joblib.dump(knn_model, "models/knn_model.joblib")
 joblib.dump(support_vector_model, "models/support_vector_model.joblib")
+joblib.dump(xgb_model, "models/xgb_boost.joblib")
